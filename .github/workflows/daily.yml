@@ -1,0 +1,29 @@
+name: 每日技术推送
+
+on:
+  schedule:
+    # 北京时间每天早上 8:00（UTC 0:00）
+    - cron: "0 0 * * *"
+  # 允许手动触发（测试用）
+  workflow_dispatch:
+
+jobs:
+  daily-digest:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+
+    steps:
+      - name: 检出代码
+        uses: actions/checkout@v4
+
+      - name: 安装 Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: 运行日报脚本
+        env:
+          FEISHU_WEBHOOK: ${{ secrets.FEISHU_WEBHOOK }}
+          TZ: Asia/Shanghai
+        run: python digest.py
+        working-directory: daily-digest
