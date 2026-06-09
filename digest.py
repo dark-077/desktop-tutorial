@@ -23,134 +23,29 @@ FEISHU_SECRET = os.environ.get("FEISHU_SECRET", "")
 
 
 # ========== 精选工具库 v3 — 开发者成长路线 ==========
-# 每个工具有 name / url / desc / why / how_to_use
-# 每天从每个分类随机选 1 个推送
-
 TOOLS = {
     "🤖 AI Agent & 框架": [
-        {
-            "name": "Ollama + Open-WebUI",
-            "url": "https://ollama.com/",
-            "desc": "本地运行 DeepSeek/Qwen 等大模型，配合 ChatGPT 同款界面",
-            "why": "学 AI 第一步不是调 API，而是自己电脑上跑一个模型。Ollama 一行命令下载模型，Open-WebUI 套一个聊天界面，完全免费离线。装完你就有了私人 ChatGPT。",
-            "how_to_use": "① 下载 Ollama → ② 终端运行 ollama run deepseek-r1:7b → ③ 再装 Open-WebUI 界面 → ④ 浏览器打开对话。详见 https://ollama.com/download",
-        },
-        {
-            "name": "Dify — 可视化 AI 应用平台",
-            "url": "https://github.com/langgenius/dify",
-            "desc": "不写代码也能搭 AI 应用，拖拽式工作流",
-            "why": "想做 AI 批改作文？Dify 让你拖拽搭出来。LLM + 知识库 + 工具调用 + 工作流全可视化。先搭原型验证想法，再决定要不要写代码。",
-            "how_to_use": "① cloud.dify.ai 注册免费账号 → ② 创建应用选聊天助手 → ③ 写 Prompt → ④ 点发布，得到一个可分享链接。",
-        },
-        {
-            "name": "LangChain + LangGraph",
-            "url": "https://github.com/langchain-ai/langchain",
-            "desc": "AI Agent 工业标准库 (138k+34k ⭐)",
-            "why": "需要精确控制 agent 行为？LangChain 是行业标配。LangGraph 用状态机限制 agent——不靠「希望 AI 别跑偏」，靠代码。你的 agent-bridge 如果要自己做，底层就是这套。",
-            "how_to_use": "pip install langchain langchain-openai → 用 create_tool_calling_agent 写第一个工具调用 agent → 官方教程 python.langchain.com",
-        },
-        {
-            "name": "MetaGPT — AI 软件公司",
-            "url": "https://github.com/FoundationAgents/MetaGPT",
-            "desc": "一句话生成完整项目（代码+文档+测试）",
-            "why": "它模拟完整软件公司：产品经理→架构师→程序员→测试员。你给一句话需求（写贪吃蛇），它输出完整项目。学编程的终极目标就是能做出东西，提前体验。",
-            "how_to_use": "pip install metagpt → 配置 API key → 运行 metagpt 写一个命令行待办事项工具 → 看它生成的项目结构",
-        },
-        {
-            "name": "Microsoft AutoGen",
-            "url": "https://github.com/microsoft/autogen",
-            "desc": "微软出品的多 Agent 对话协作框架 (58k ⭐)",
-            "why": "核心概念「对话即编程」——多个 agent 对话协作解决问题。比 CrewAI 更底层灵活。大厂背书，工业界在用。适合需要多轮交互的复杂场景。",
-            "how_to_use": "pip install autogen-agentchat → 创建 AssistantAgent + UserProxyAgent → 给任务让他们对话完成",
-        },
-        {
-            "name": "CrewAI — 多 Agent 任务编排",
-            "url": "https://github.com/crewAIInc/crewAI",
-            "desc": "定义角色 Agent 自动协作完成任务 (53k ⭐)",
-            "why": "你正在用 Hermes+Claude 双 agent 协作，CrewAI 就是把这种模式框架化了。学完这个，你对 Agent 协作的理解从经验上升到方法论。",
-            "how_to_use": "pip install crewai → 定义 Agent(role=研究员) + Task → crew.kickoff() → 看两个 AI 自动协作",
-        },
+        {"name": "Ollama + Open-WebUI", "url": "https://ollama.com/", "desc": "本地运行大模型，一行命令", "why": "学 AI 第一步：自己电脑跑模型。Ollama 一行命令下载 DeepSeek/Qwen，Open-WebUI 套 ChatGPT 同款界面，完全免费离线。", "how_to_use": "① 下载 Ollama → ② 终端 ollama run deepseek-r1:7b → ③ 装 Open-WebUI 界面 → ④ 浏览器打开对话"},
+        {"name": "Dify", "url": "https://github.com/langgenius/dify", "desc": "不写代码搭 AI 应用 (144k⭐)", "why": "想做 AI 批改作文？Dify 拖拽搭出来。LLM+知识库+工作流全可视化。先做原型验证想法。", "how_to_use": "① cloud.dify.ai 注册 → ② 创建聊天助手 → ③ 写 Prompt → ④ 发布，得到可分享链接"},
+        {"name": "LangChain + LangGraph", "url": "https://github.com/langchain-ai/langchain", "desc": "AI Agent 工业标准 (138k+34k⭐)", "why": "需要精确控制 agent？LangChain 是行业标配。LangGraph 用状态机限制行为——不靠希望，靠代码。", "how_to_use": "pip install langchain langchain-openai → 用 create_tool_calling_agent 写第一个 agent"},
+        {"name": "MetaGPT", "url": "https://github.com/FoundationAgents/MetaGPT", "desc": "一句话生成完整项目 (68k⭐)", "why": "模拟完整软件公司：产品经理→架构师→程序员→测试员。「写贪吃蛇」→完整代码+文档+测试。", "how_to_use": "pip install metagpt → 配置 API key → metagpt 写一个命令行待办事项工具"},
+        {"name": "Microsoft AutoGen", "url": "https://github.com/microsoft/autogen", "desc": "微软多 Agent 框架 (58k⭐)", "why": "对话即编程——多个 agent 对话协作。大厂背书，工业界在用。适合多轮交互复杂场景。", "how_to_use": "pip install autogen-agentchat → 创建 AssistantAgent + UserProxyAgent → 给任务"},
+        {"name": "CrewAI", "url": "https://github.com/crewAIInc/crewAI", "desc": "多 Agent 任务编排 (53k⭐)", "why": "你正用 Hermes+Claude 双 agent，CrewAI 把这种模式框架化了。学完从经验上升到方法论。", "how_to_use": "pip install crewai → 定义 Agent(role=研究员) + Task → crew.kickoff()"},
     ],
     "🎨 AI 创作工具": [
-        {
-            "name": "Stable Diffusion WebUI",
-            "url": "https://github.com/AUTOMATIC1111/stable-diffusion-webui",
-            "desc": "AI 绘画的 Photoshop，最成熟的开源 SD 界面 (163k ⭐)",
-            "why": "想做 AI 绘画？这个项目是所有教程的起点。图生图、局部重绘、ControlNet 精准控制全支持。学这个不仅能出图，还能理解扩散模型推理流程。",
-            "how_to_use": "需 NVIDIA 显卡 6GB+ → git clone → 下载模型放 models/ → 运行 webui-user.bat → 浏览器打开 localhost:7860",
-        },
-        {
-            "name": "Open-Generative-AI",
-            "url": "https://github.com/Anil-matcha/Open-Generative-AI",
-            "desc": "集成 200+ AI 模型的免费创作工作室 (18k ⭐)",
-            "why": "不想装各种环境？这个 Web 应用集成了图片生成、视频生成、音乐生成，浏览器直接操作。快速体验各种 AI 创作能力，找到感兴趣的方向再深入。",
-            "how_to_use": "git clone → npm install && npm run dev → 浏览器打开 → 选模型 → 输入 prompt → 生成",
-        },
-        {
-            "name": "Duix-Avatar — AI 数字人",
-            "url": "https://github.com/duixcom/Duix-Avatar",
-            "desc": "一张照片+一段音频=口型同步的数字人视频 (13k ⭐)",
-            "why": "想做 AI 虚拟老师/主播？这是真开源的方案。C 语言纯实现性能极高，国内团队中文文档。读源码能学到音视频同步、实时渲染的技术细节。",
-            "how_to_use": "克隆项目 → 下载预训练模型 → 准备正面照+音频 → 运行脚本生成数字人视频",
-        },
-        {
-            "name": "KrillinAI — AI 视频翻译配音",
-            "url": "https://github.com/krillinai/KrillinAI",
-            "desc": "YouTube/B站视频 → 翻译 → AI 配音 → 带字幕输出 (10k ⭐)",
-            "why": "看国外 AI 教程只有英文？用它翻译成中文配音，学习效率翻倍。下载→语音识别→翻译→配音全流程自动化。",
-            "how_to_use": "下载 KrillinAI 桌面版 → 粘贴视频链接 → 选源语言和目标语言 → 点开始",
-        },
-        {
-            "name": "Toonflow — AI 短剧/动画创作",
-            "url": "https://github.com/HBAI-Ltd/Toonflow-app",
-            "desc": "小说/剧本 → AI 分镜 → 角色生成 → 合成动画 (9.7k ⭐)",
-            "why": "国内团队开源。如果你想了解 AI 怎么做视频，源码就是完整教程：NLP 理解剧本 → 计算机视觉生成画面 → 视频合成，全链路。",
-            "how_to_use": "下载 Toonflow 桌面版 → 导入剧本 → AI 自动拆分分镜 → 调整后导出视频",
-        },
-        {
-            "name": "FireRed-OpenStoryline — AI 剪辑 Agent",
-            "url": "https://github.com/FireRedTeam/FireRed-OpenStoryline",
-            "desc": "用自然语言操作视频剪辑的 AI Agent (2.8k ⭐)",
-            "why": "你说「删掉第三段」「加转场」，它自动操作 FFmpeg。底层 LangChain+FFmpeg，是学习 AI Agent 操作真实工具的绝佳案例。",
-            "how_to_use": "git clone → pip install -r requirements.txt → 导入视频 → 自然语言告诉它怎么剪",
-        },
+        {"name": "Stable Diffusion WebUI", "url": "https://github.com/AUTOMATIC1111/stable-diffusion-webui", "desc": "AI 绘画的 Photoshop (163k⭐)", "why": "想做 AI 绘画？这是所有教程的起点。图生图、ControlNet 精准控制全支持。", "how_to_use": "需 NVIDIA 显卡 6GB+ → git clone → 下载模型 → 运行 webui-user.bat → localhost:7860"},
+        {"name": "Open-Generative-AI", "url": "https://github.com/Anil-matcha/Open-Generative-AI", "desc": "200+ AI 模型的免费工作室 (18k⭐)", "why": "集成图片/视频/音乐生成，浏览器直接用。快速体验 AI 创作，找到方向再深入。", "how_to_use": "git clone → npm install && npm run dev → 浏览器打开 → 选模型生成"},
+        {"name": "Duix-Avatar", "url": "https://github.com/duixcom/Duix-Avatar", "desc": "AI 数字人：照片+音频=视频 (13k⭐)", "why": "想做虚拟老师/主播？真开源 C 语言方案。读源码学音视频同步、实时渲染。", "how_to_use": "克隆项目 → 下载模型 → 准备照片+音频 → 运行脚本生成数字人视频"},
+        {"name": "KrillinAI", "url": "https://github.com/krillinai/KrillinAI", "desc": "视频翻译配音一条龙 (10k⭐)", "why": "YouTube/B站视频自动翻译成中文配音。看国外教程效率翻倍。", "how_to_use": "下载桌面版 → 粘贴视频链接 → 选语言 → 点开始"},
+        {"name": "Toonflow", "url": "https://github.com/HBAI-Ltd/Toonflow-app", "desc": "AI 短剧：小说→动画 (9.7k⭐)", "why": "国内团队开源。NLP→分镜→角色→合成，全链路源码可读。", "how_to_use": "下载桌面版 → 导入剧本 → AI 拆分分镜 → 导出视频"},
+        {"name": "FireRed-OpenStoryline", "url": "https://github.com/FireRedTeam/FireRed-OpenStoryline", "desc": "自然语言操作剪辑 (2.8k⭐)", "why": "说「删第三段」它自动操作 FFmpeg。LangChain+FFmpeg，学 Agent 操作真实工具的好案例。", "how_to_use": "git clone → pip install → 导入视频 → 自然语言告诉它怎么剪"},
     ],
     "🛠 开发者效率工具": [
-        {
-            "name": "VS Code",
-            "url": "https://code.visualstudio.com/",
-            "desc": "微软免费代码编辑器，全球开发者首选",
-            "why": "轻量、免费、插件丰富。写 Python、Vue、Markdown 都有最好支持。Ctrl+` 打开终端直接运行代码。",
-            "how_to_use": "① 官网下载 → ② 装 Python 插件 → ③ Ctrl+` 打开终端直接运行代码。",
-        },
-        {
-            "name": "Everything（文件秒搜）",
-            "url": "https://www.voidtools.com/",
-            "desc": "Windows 文件搜索，比系统自带快 100 倍",
-            "why": "Windows 自带搜索太慢？Everything 输入文件名瞬间出结果，1TB 硬盘也能秒搜。",
-            "how_to_use": "① 下载安装 → ② 打开直接打字 → ③ 搜索结果即时显示，双击打开。",
-        },
-        {
-            "name": "Snipaste（截图+贴图）",
-            "url": "https://www.snipaste.com/",
-            "desc": "截图后可以「贴」在屏幕上的效率工具",
-            "why": "截完图直接贴在屏幕上当参考（比如把题目贴在角落对照写代码）。程序员效率神器。",
-            "how_to_use": "① 下载 → ② F1 截图 → ③ F3 把截图贴到屏幕上 → ④ Esc 关闭。",
-        },
-        {
-            "name": "uTools（万能工具箱）",
-            "url": "https://www.u.tools/",
-            "desc": "Alt+空格呼出：翻译、计算、二维码、颜色…",
-            "why": "装一个 uTools = 装了几十个小工具。随时呼出，用完即走。",
-            "how_to_use": "① 官网下载 → ② Alt+空格呼出 → ③ 输入「翻译 hello」就能翻译。",
-        },
-        {
-            "name": "Ditto（剪贴板管理）",
-            "url": "https://ditto-cp.sourceforge.io/",
-            "desc": "保存你复制过的所有内容，随时找回",
-            "why": "刚复制的东西被覆盖了？Ditto 记住所有复制历史（重启后还在）。写论文、写代码必备。",
-            "how_to_use": "① 安装 → ② 正常 Ctrl+C → ③ Ctrl+` 打开 Ditto 列表 → ④ 双击历史记录粘贴。",
-        },
+        {"name": "VS Code", "url": "https://code.visualstudio.com/", "desc": "全球开发者首选编辑器", "why": "轻量免费插件丰富。Python/Vue/Markdown 全支持。", "how_to_use": "① 官网下载 → ② 装 Python 插件 → ③ Ctrl+` 打开终端"},
+        {"name": "Everything", "url": "https://www.voidtools.com/", "desc": "Windows 文件秒搜", "why": "输入文件名瞬间出结果，1TB 硬盘秒搜。", "how_to_use": "① 下载安装 → ② 打开打字 → ③ 双击打开文件"},
+        {"name": "Snipaste", "url": "https://www.snipaste.com/", "desc": "截图后贴屏幕上", "why": "截完图贴在屏幕当参考。程序员效率神器。", "how_to_use": "① 下载 → ② F1 截图 → ③ F3 贴到屏幕"},
+        {"name": "uTools", "url": "https://www.u.tools/", "desc": "Alt+空格万能工具箱", "why": "一个工具 = 翻译+计算+二维码+颜色… 用完即走。", "how_to_use": "① 下载 → ② Alt+空格 → ③ 输入翻译 hello"},
+        {"name": "Ditto", "url": "https://ditto-cp.sourceforge.io/", "desc": "剪贴板历史管理", "why": "记住所有复制历史，重启后还在。写代码写论文必备。", "how_to_use": "① 安装 → ② Ctrl+C → ③ Ctrl+` 打开列表 → ④ 双击粘贴"},
     ],
 }
 
